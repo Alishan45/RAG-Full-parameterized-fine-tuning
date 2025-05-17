@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical GPT - Your AI Medical Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+</head>
+<body>
+    {% include 'navBar.html' %}
+    
+    <div class="hero-section">
+        <div class="hero-content">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Medical GPT Logo" class="logo">
+            <h1 class="animated-gradient">Your Personal Medical AI Assistant</h1>
+            <p>Get accurate, AI-powered medical guidance anytime, anywhere. Ask questions, upload reports, and get expert-level insights.</p>
+            
+            {% if 'user_id' not in session %}
+                <div class="cta-buttons">
+                    <a href="{{ url_for('login') }}" class="btn primary">Login</a>
+                    <a href="{{ url_for('signup') }}" class="btn secondary">Sign Up</a>
+                </div>
+            {% else %}
+                <div class="cta-buttons">
+                    <a href="{{ url_for('chat') }}" class="btn primary">Go to Chat</a>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="hero-animation">
+            <div class="background-container">
+                <img src="{{ url_for('static', filename='images/bg.png') }}" alt="Background" class="background-image">
+            </div>
+            <img src="{{ url_for('static', filename='images/bot.png') }}" alt="AI Doctor Illustration" class="bot-image">
+        </div>
+    </div>
+    
+    <div class="features-section">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/chat.png') }}" alt="Chat Icon">
+                <h3>Medical Chat</h3>
+                <p>Ask any health-related questions and get instant, reliable answers from our AI medical expert.</p>
+            </div>
+            
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/attachment.png') }}" alt="File Icon">
+                <h3>Document Analysis</h3>
+                <p>Upload lab reports, prescriptions, or medical records for detailed analysis and explanations.</p>
+            </div>
+            
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/code.png') }}" alt="Secure Icon">
+                <h3>Secure & Private</h3>
+                <p>Your medical data is encrypted and never shared. HIPAA-compliant security measures.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="testimonial-section">
+        <h2>Trusted by Medical Professionals</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <img src="{{ url_for('static', filename='images/human1.jpeg') }}" alt="Dr. Sarah Johnson">
+                <p>"Medical GPT has become an invaluable tool in my practice for quick reference and patient education."</p>
+                <span>- Dr. Sarah Johnson, MD</span>
+            </div>
+            <div class="testimonial">
+                <img src="{{ url_for('static', filename='images/human2.jpeg') }}" alt="Nurse Michael Chen">
+                <p>"The document analysis feature saves me hours each week reviewing patient reports."</p>
+                <span>- Nurse Michael Chen, RN</span>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <img src="{{ url_for('static', filename='images/orbital.png') }}" alt="Footer Logo" class="footer-logo">
+        <p>© 2025 Medical GPT. All rights reserved.</p>
+    </footer>
+</body>
+</html>

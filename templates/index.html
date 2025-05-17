@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical GPT - Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+</head>
+<body>
+    <!-- Auth Buttons -->
+    <div class="auth-buttons">
+        {% if 'user_id' in session %}
+            <a href="{{ url_for('logout') }}" class="auth-btn signup-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="auth-btn login-btn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="{{ url_for('signup') }}" class="auth-btn signup-btn">
+                <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+        {% endif %}
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar Toggle Button -->
+        <button id="history-toggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Sidebar for Chat History -->
+        <div class="sidebar" id="history-sidebar">
+            <div class="sidebar-header">
+                <button class="new-chat-btn" id="new-chat-btn">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
+                <button class="close-sidebar" id="close-sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-sessions" placeholder="Search conversations...">
+            </div>
+            
+            <div class="sessions-list" id="sessions-list">
+                <!-- Sessions will be loaded here -->
+                <div class="no-sessions">No conversations yet</div>
+            </div>
+            
+            <div class="user-profile">
+                <div class="profile-icon">
+                    <img src="{{ url_for('static', filename='images/human1.jpeg') }}" alt="Profile" width="40" height="40" style="border-radius: 50%;">
+                </div>
+                <div class="profile-info">
+                    <div class="username">
+                        {% if session.get('user_id') %}
+                            {{ session.get('email', 'User').split('@')[0] }}
+                        {% else %}
+                            Guest User
+                        {% endif %}
+                    </div>
+                    <div class="user-email">
+                        {% if session.get('email') %}
+                            {{ session.get('email') }}
+                        {% else %}
+                            Guest Mode
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="model-selector">
+                <label for="model-choice">AI Model:</label>
+                <select id="model-choice">
+                    <option value="gemini">Gemini API</option>
+                    <option value="rag">RAG Medical Model</option>
+                </select>
+                <div class="app-logo">
+                    <a href="{{ url_for('home') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MedGPT Logo" height="30">
+                        <span>MedGPT</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <!-- Chat messages will be inserted here -->
+            </div>
+            
+            <div class="chat-input">
+                <div class="file-upload">
+                    <input type="file" id="file-input" accept=".pdf,.docx,.pptx,.png,.jpg,.jpeg,.txt">
+                    <label for="file-input">
+                        <img src="{{ url_for('static', filename='images/attachment.png') }}" alt="Attach File" class="attachment-icon">
+                    </label>
+                </div>
+                <input type="text" id="user-input" placeholder="Ask your medical question...">
+                <button id="send-button">
+                    <img src="{{ url_for('static', filename='images/arrow.png') }}" alt="Send">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rename Session Modal -->
+    <div id="rename-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Rename Conversation</h3>
+            <input type="text" id="new-title-input" placeholder="Enter new title">
+            <input type="hidden" id="session-id-to-rename">
+            <button id="save-rename-btn" class="primary-btn">Save</button>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Delete Conversation</h3>
+            <p>Are you sure you want to delete this conversation? This action cannot be undone.</p>
+            <input type="hidden" id="session-id-to-delete">
+            <div class="modal-actions">
+                <button id="cancel-delete-btn" class="secondary-btn">Cancel</button>
+                <button id="confirm-delete-btn" class="danger-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

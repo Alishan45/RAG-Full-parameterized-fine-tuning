@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Medical GPT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+</head>
+<body>
+    {% include 'navBar.html' %}
+
+    <!-- About Header with Full-width Image -->
+    <header class="about-header">
+        <div class="header-overlay">
+            <h1>Our Story</h1>
+            <p>Bridging technology and healthcare since 2025</p>
+        </div>
+    </header>
+
+    <!-- Mission Statement -->
+    <section class="mission-statement">
+        <div class="container">
+            <h2>Redefining Medical Assistance</h2>
+            <div class="mission-content">
+                <div class="mission-text">
+                    <p>Founded by a team of doctors and AI researchers, Medical GPT combines medical expertise with cutting-edge artificial intelligence to deliver trustworthy health information.</p>
+                    <p>We believe everyone deserves access to accurate medical guidance, regardless of location or financial means.</p>
+                </div>
+                <div class="mission-image">
+                    <img src="{{ url_for('static', filename='images/team.jpg') }}" alt="Medical team discussing">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <h2>Our Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2025</div>
+                <div class="timeline-content">
+                    <h3>Founded</h3>
+                    <p>Launched with a vision to democratize medical knowledge</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025</div>
+                <div class="timeline-content">
+                    <h3>First AI Model</h3>
+                    <p>Released our specialized medical LLM trained on verified sources</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025</div>
+                <div class="timeline-content">
+                    <h3>1M+ Users</h3>
+                    <p>Served patients and professionals worldwide</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <h2>Meet The Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/human1.jpeg') }}" alt="Dr. Sarah Johnson">
+                <h3>Dr. Sarah Johnson</h3>
+                <p class="position">Chief Medical Officer</p>
+                <p class="bio">Board-certified physician with 15 years of clinical experience leading our medical review team.</p>
+            </div>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/human2.jpeg') }}" alt="Michael Chen">
+                <h3>Michael Chen</h3>
+                <p class="position">Head of AI Research</p>
+                <p class="bio">Former Google Health researcher specializing in medical NLP and diagnostic algorithms.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <h2>Our Core Values</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🩺</div>
+                <h3>Medical Accuracy</h3>
+                <p>All responses are reviewed by our medical advisory board</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🔒</div>
+                <h3>Data Privacy</h3>
+                <p>HIPAA-compliant encryption and strict data policies</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🌍</div>
+                <h3>Global Access</h3>
+                <p>Available in 12 languages with more coming soon</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Medical GPT Logo" class="footer-logo">
+            <p>© 2025 Medical GPT. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
